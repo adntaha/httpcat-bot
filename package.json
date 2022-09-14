@@ -5,6 +5,7 @@
   "module": "dist/index.mjs",
   "scripts": {
     "dev": "miniflare --watch --debug --wrangler-env=development",
+    "deploy": "wrangler2 publish",
     "deploy:global": "node --no-warnings --experimental-vm-modules scripts/deploy.js"
   },
   "dependencies": {

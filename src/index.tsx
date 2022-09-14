@@ -1,5 +1,5 @@
-import { createHandler } from "slshx";
-import { http } from "./http";
+import { createHandler } from 'slshx';
+import { http } from './http';
 
 const handler = createHandler({
   // Replaced by esbuild when bundling, see scripts/build.js (do not edit)
