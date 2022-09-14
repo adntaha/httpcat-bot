@@ -29,19 +29,12 @@ export function http(): CommandHandler {
     },
   });
 
+  const image = 'https://http.cat/' + code;
+
   if (!str_statuses.includes(code))
     return () => <Message ephemeral>Invalid HTTP status code</Message>;
 
-  return async () => {
-    const data = await fetch('https://http.cat/' + code).then((res) =>
-      res.blob()
-    );
-
-    return (
-      <Message
-        ephemeral
-        attachments={[new File([data], code + '.jpg', { type: 'image/jpeg' })]}
-      />
-    );
+  return () => {
+    return <Message ephemeral>{image}</Message>;
   };
 }
