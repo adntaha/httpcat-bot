@@ -30,11 +30,11 @@ export function http(): CommandHandler {
   });
 
   const image = 'https://http.cat/' + code;
-
-  if (!str_statuses.includes(code))
-    return () => <Message ephemeral>Invalid HTTP status code</Message>;
+  const message = str_statuses.includes(code)
+    ? image
+    : 'Invalid HTTP status code';
 
   return () => {
-    return <Message ephemeral>{image}</Message>;
+    return <Message ephemeral>{message}</Message>;
   };
 }
