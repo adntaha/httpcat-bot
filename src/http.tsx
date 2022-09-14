@@ -14,7 +14,9 @@ export function http(): CommandHandler {
   useDescription(
     'Returns the http.cat image associated with a http return code'
   );
+
   const str_statuses = Object.keys(statuses).map((e) => String(e));
+
   const code = useString('code', 'HTTP response code', {
     required: true,
     async autocomplete(interaction) {
@@ -29,12 +31,16 @@ export function http(): CommandHandler {
     },
   });
 
+  const show = useString('show', 'Who to show the image to', {
+    choices: ['me', 'everyone']
+  });
+
   const image = 'https://http.cat/' + code;
   const message = str_statuses.includes(code)
     ? image
     : 'Invalid HTTP status code';
 
   return () => {
-    return <Message ephemeral>{message}</Message>;
+    return <Message ephemeral={show === 'everyone' ? false : true}>{message}</Message>;
   };
 }
