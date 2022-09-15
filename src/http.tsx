@@ -32,15 +32,24 @@ export function http(): CommandHandler {
   });
 
   const show = useString('show', 'Who to show the image to', {
-    choices: ['me', 'everyone']
+    choices: ['me', 'everyone'],
   });
 
-  const image = 'https://http.cat/' + code;
-  const message = str_statuses.includes(code)
-    ? image
-    : 'Invalid HTTP status code';
+  const image_url = 'https://http.cat/' + code;
+  const valid = str_statuses.includes(code);
 
-  return () => {
-    return <Message ephemeral={show === 'everyone' ? false : true}>{message}</Message>;
+  if (!valid)
+    return () => <Message ephemeral>Invalid HTTP status code</Message>;
+
+  return async () => {
+    const res = await fetch(image_url).then((res) => res.blob());
+    const file = new File([res], code + '.jpg');
+
+    return (
+      <Message
+        ephemeral={show === 'everyone' ? false : true}
+        attachments={[file]}
+      />
+    );
   };
 }
