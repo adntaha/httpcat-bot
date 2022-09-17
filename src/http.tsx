@@ -11,7 +11,7 @@ import statuses from './statuses';
 
 export function http(): CommandHandler {
   useDescription(
-    'Returns the http.cat image associated with a http return code'
+    'Returns the http.cat image associated with an http status code'
   );
 
   const str_statuses = Object.keys(statuses).map((e) => String(e));
