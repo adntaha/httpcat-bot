@@ -6,8 +6,7 @@ import {
   Message,
 } from 'slshx';
 
-import { APIApplicationCommandInteractionDataStringOption } from 'discord-api-types/v9';
-
+import { getOptionValue } from './util'
 import statuses from './statuses';
 
 export function http(): CommandHandler {
@@ -20,11 +19,7 @@ export function http(): CommandHandler {
   const code = useString('code', 'HTTP response code', {
     required: true,
     async autocomplete(interaction) {
-      const option = (
-        interaction.data.options.find(
-          (e) => e.name === 'code'
-        ) as APIApplicationCommandInteractionDataStringOption
-      ).value;
+      const option = getOptionValue(interaction, 'code');
       return str_statuses
         .filter((status) => status.startsWith(option))
         .slice(0, 25);
