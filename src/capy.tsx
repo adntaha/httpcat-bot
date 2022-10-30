@@ -1,4 +1,3 @@
-// https://http.capy.pics/403
 import {
   CommandHandler,
   useDescription,
