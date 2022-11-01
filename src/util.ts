@@ -1,7 +1,7 @@
 import {
   APIApplicationCommandAutocompleteInteraction,
   APIApplicationCommandInteractionDataStringOption,
-} from 'discord-api-types/v9';
+} from "discord-api-types/v10";
 
 export function getOptionValue(
   interaction: APIApplicationCommandAutocompleteInteraction,
