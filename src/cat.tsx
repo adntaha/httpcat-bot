@@ -4,6 +4,7 @@ import {
   useString,
   createElement,
   Message,
+  useNumber,
 } from "slshx";
 
 import { getOptionValue } from "./util";
@@ -14,14 +15,14 @@ export function cat(): CommandHandler {
     "Returns the http.cat image associated with an http status code"
   );
 
-  const str_statuses = Object.keys(statuses).map((e) => String(e));
+  const statusCodes = Object.values(statuses).map((status) => status.code);
 
-  const code = useString("code", "HTTP response code", {
+  const code = useNumber("code", "HTTP response code", {
     required: true,
     async autocomplete(interaction) {
       const option = getOptionValue(interaction, "code");
-      return str_statuses
-        .filter((status) => status.startsWith(option))
+      return statusCodes
+        .filter((status) => String(status).startsWith(option))
         .slice(0, 25);
     },
   });
@@ -31,7 +32,7 @@ export function cat(): CommandHandler {
   });
 
   const image_url = "https://http.cat/" + code;
-  const valid = str_statuses.includes(code);
+  const valid = statusCodes.includes(code);
 
   if (!valid)
     return () => <Message ephemeral>Invalid HTTP status code</Message>;
