@@ -38,13 +38,8 @@ export function capy(): CommandHandler {
 
   return async () => {
     const res = await fetch(image_url).then((res) => res.blob());
-    const file = new File([res], code + ".png");
+    const file = new File([res], "image.png");
 
-    return (
-      <Message
-        ephemeral={show === "everyone" ? false : true}
-        attachments={[file]}
-      />
-    );
+    return <Message ephemeral={show === "me"} attachments={[file]} />;
   };
 }
