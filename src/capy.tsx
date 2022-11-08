@@ -38,9 +38,10 @@ export function capy(): CommandHandler {
     return () => <Message ephemeral>Invalid HTTP status code</Message>;
 
   return async () => {
-    const res = await fetch(image_url).then((res) => res.blob());
-    const file = new File([res], "image.png");
+    // const res = await fetch(image_url).then((res) => res.blob());
+    // const file = new File([res], "image.png");
 
-    return <Message ephemeral={show === "me"} attachments={[file]} />;
+    // return <Message ephemeral={show === "me"} attachments={[file]} />;
+    return <Message ephemeral={show === "me"}>{image_url}</Message>;
   };
 }
